@@ -6,7 +6,6 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import pandas
 import numpy as np
-import os
 import matplotlib.pyplot as plt
 
 def read_dataset(filename, columns, scaler):
