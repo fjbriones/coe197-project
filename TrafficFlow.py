@@ -42,9 +42,9 @@ def load_model(filename):
     print('Model is loaded')
     return loaded_model
 
-def model_lstm_train(trainX, trainY, epochs, batch_size, validation_split):
+def model_lstm_train(units, trainX, trainY, epochs, batch_size, validation_split):
     model = Sequential()
-    model.add(LSTM(32, input_shape=(time_step, 1)))
+    model.add(LSTM(units, input_shape=(time_step, 1)))
     model.add(Dense(1))
     model.compile(loss='mse', optimizer='adam')
     model.fit(trainX, trainY, epochs=epochs, batch_size=batch_size, verbose=2, validation_split=validation_split)
@@ -53,9 +53,9 @@ def model_lstm_train(trainX, trainY, epochs, batch_size, validation_split):
 
     return model
 
-def model_gru_train(trainX, trainY, epochs, batch_size, validation_split):
+def model_gru_train(units, trainX, trainY, epochs, batch_size, validation_split):
     model = Sequential()
-    model.add(GRU(32, input_shape=(time_step, 1)))
+    model.add(GRU(units, input_shape=(time_step, 1)))
     model.add(Dense(1))
     model.compile(loss='mse', optimizer='adam')
     model.fit(trainX, trainY, epochs=epochs, batch_size=batch_size, verbose=2, validation_split=validation_split)
@@ -77,13 +77,14 @@ def flow_predict(x_data, x_true, model, model_type):
 
     return dataPredict, x_true
 
-def flow_plot(x_pred, x_true, len, start):
+def flow_plot(x_pred, x_true, len):
     truePlot = np.transpose(x_true)
     truePlot = truePlot[0:len]
-    predPlot = x_pred[start:len+start]
+    predPlot = x_pred[0:len]
 
-    plt.plot(truePlot)
-    plt.plot(predPlot)
+    trueP = plt.plot(truePlot, label='True Plot')
+    predP = plt.plot(predPlot, label='Predicted Plot')
+    plt.legend()
     plt.show()
 
 np.random.seed(7)
@@ -101,13 +102,13 @@ testX, testY = create_dataset(test, time_step)
 trainX = np.reshape(trainX, (trainX.shape[0], trainX.shape[1], 1))
 testX = np.reshape(testX, (testX.shape[0], testX.shape[1], 1))
 
-#modelLSTM = model_lstm_train(trainX, trainY, epochs=2000, batch_size=64, validation_split=0.2)
+#modelLSTM = model_lstm_train(64, trainX, trainY, epochs=2000, batch_size=64, validation_split=0.2)
 
-#modelGRU = model_gru_train(trainX, trainY, epochs=2000, batch_size=64, validation_split=0.2)
+#modelGRU = model_gru_train(64, trainX, trainY, epochs=2000, batch_size=64, validation_split=0.2)
 
 modelLSTM = load_model('models/LSTM_model')
 
 predictedTrainLSTM, trainY = flow_predict(trainX, trainY, modelLSTM, 'LSTM ')
 predictedTestLSTM, testY = flow_predict(testX, testY, modelLSTM, 'LSTM ')
 
-flow_plot(predictedTestLSTM, testY, len=len_day, start=time_step)
+flow_plot(predictedTestLSTM, testY, len=len_day)
