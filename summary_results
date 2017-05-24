@@ -1,0 +1,27 @@
+50 epochs: Scale 0 to 1
+LSTM Training Test score: 90.29 MSE 6.99 MAE
+LSTM Testing Test score: 103.87 MSE 7.52 MAE
+GRU Training Test score: 90.96 MSE 7.06 MAE
+GRU Testing Test score: 106.02 MSE 7.63 MAE
+NAN LSTM Training Test score: 90.33 MSE 7.00 MAE
+NAN LSTM Testing Test score: 103.41 MSE 7.51 MAE
+NAN GRU Training Test score: 106.41 MSE 7.48 MAE
+NAN GRU Testing Test score: 125.86 MSE 8.15 MAE
+NANI LSTM Training Test score: 93.50 MSE 7.11 MAE
+NANI LSTM Testing Test score: 106.94 MSE 7.63 MAE
+NANI GRU Training Test score: 93.78 MSE 7.11 MAE
+NANI GRU Testing Test score: 110.34 MSE 7.71 MAE
+
+50 epochs: Scale -1 to 1
+LSTM Training Test score: 91.95 MSE 7.38 MAE
+LSTM Testing Test score: 105.98 MSE 7.88 MAE
+GRU Training Test score: 90.19 MSE 6.97 MAE
+GRU Testing Test score: 105.87 MSE 7.55 MAE
+NAN LSTM Training Test score: 89.86 MSE 7.02 MAE
+NAN LSTM Testing Test score: 102.73 MSE 7.52 MAE
+NAN GRU Training Test score: 90.37 MSE 6.98 MAE
+NAN GRU Testing Test score: 104.64 MSE 7.51 MAE
+NANI LSTM Training Test score: 90.36 MSE 7.01 MAE
+NANI LSTM Testing Test score: 103.83 MSE 7.53 MAE
+NANI GRU Training Test score: 90.61 MSE 6.98 MAE
+NANI GRU Testing Test score: 105.53 MSE 7.52 MAE
