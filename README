@@ -1,1 +1,1 @@
-This is a project for CoE 197.
+This project is a traffic flow predictor using LSTM and GRU using noisy activation functions. Datasets are included which are from Caltrans Performance Measurement Systems. The noisy activation functions are from https://github.com/caglar/noisy_units
