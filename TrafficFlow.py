@@ -4,6 +4,7 @@ from keras.layers import Dense
 from keras.layers import LSTM, GRU
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+from matplotlib.dates import DateFormatter
 import pandas
 import keras
 import numpy as np
@@ -256,26 +257,28 @@ predictedTestNaniLstm, testNaniLstm, data_test_mse[4,i], data_test_mae[4,i] = fl
 predictedTestNaniGru, testNaniGru, data_test_mse[5,i], data_test_mae[5,i] = flow_predict(testX, testY, modelNaniGru, 'NANI GRU Testing ')
 
 #For graphing purposes
-start = len_day - 6
-
-timeAxis = [datetime.datetime(year=2014, month=3, day=2, hour=0, minute=0) + datetime.timedelta(minutes=5*i) for i in range(0,len_day)]
+start = (int)(len_day - 6)
+end = (int)(2*len_day)
+timeAxis = [datetime.datetime(year=2016, month=3, day=2, hour=0, minute=0) + datetime.timedelta(minutes=5*i) for i in range(0,end)]
 true = np.transpose(testLstm)
-true = true[start:start+len_day]
-pred1 = predictedTestLstm[start:start+len_day]
-pred2 = predictedTestGru[start:start+len_day]
-pred3 = predictedTestNanLstm[start:start+len_day]
-pred4 = predictedTestNanGru[start:start+len_day]
-pred5 = predictedTestNaniLstm[start:start+len_day]
-pred6 = predictedTestNaniGru[start:start+len_day]
+true = true[start:start+end]
+pred1 = predictedTestLstm[start:start+end]
+pred2 = predictedTestGru[start:start+end]
+pred3 = predictedTestNanLstm[start:start+end]
+pred4 = predictedTestNanGru[start:start+end]
+pred5 = predictedTestNaniLstm[start:start+end]
+pred6 = predictedTestNaniGru[start:start+end]
 
-plt.plot(timeAxis, true, label='True Plot')
-plt.plot(timeAxis, pred1, label='LSTM')
-plt.plot(timeAxis, pred2, label='GRU')
-plt.plot(timeAxis, pred3, label='NAN LSTM')
-plt.plot(timeAxis, pred4, label='NAN GRU')
-plt.plot(timeAxis, pred5, label='NANI LSTM')
-plt.plot(timeAxis, pred6, label='NANI GRU')
-plt.gcf().autofmt_xdate()
+fig, ax = plt.subplots(1)
+ax.plot(timeAxis, true, label='True Plot')
+# ax.plot(timeAxis, pred1, label='LSTM')
+# ax.plot(timeAxis, pred2, label='GRU')
+# ax.plot(timeAxis, pred3, label='NAN LSTM')
+# ax.plot(timeAxis, pred4, label='NAN GRU')
+# ax.plot(timeAxis, pred5, label='NANI LSTM')
+ax.plot(timeAxis, pred6, label='NANI GRU')
+fig.autofmt_xdate()
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
 plt.xlabel('Time')
 plt.ylabel('Veh/5min')
 plt.legend()
